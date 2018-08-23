@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/simulation/Car.gd" type="Script" id=1]
+[ext_resource path="res://sprites/car.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Sensor.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 15.1493, 30.0581 )
+_sections_unfolded = [ "Resource" ]
+
+[node name="Car" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 2
+collision_mask = 3
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "collision" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 30, 60 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="Collision" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[node name="Sensors" type="Node2D" parent="." index="2"]
+
+[node name="SensorFront" parent="Sensors" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 0, 25 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="SensorFrontRight" parent="Sensors" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( -9, 24 )
+rotation = 0.261799
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="SensorFrontLeft" parent="Sensors" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 9, 24 )
+rotation = -0.261799
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="SensorRight" parent="Sensors" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( -9, 14 )
+rotation = 0.523599
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="SensorLeft" parent="Sensors" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 9, 14 )
+rotation = -0.523599
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+

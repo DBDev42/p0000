@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/track_curve.png" type="Texture" id=1]
+[ext_resource path="res://scripts/simulation/Checkpoint.gd" type="Script" id=2]
+[ext_resource path="res://sprites/checkpoint.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 40.0
+
+[node name="TrackCurve" type="Sprite"]
+
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 200, 200 )
+_sections_unfolded = [ "Cell", "Region" ]
+
+[node name="Checkpoint" type="Area2D" parent="." index="0" groups=[
+"checkpoint",
+]]
+
+position = Vector2( -13, -50 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 2 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Checkpoint" index="0"]
+
+texture = ExtResource( 3 )
+
+[node name="Collision" type="CollisionShape2D" parent="Checkpoint" index="1"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BorderLeft" type="StaticBody2D" parent="." index="1" groups=[
+"border",
+]]
+
+position = Vector2( 0, -55 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Collision" type="CollisionPolygon2D" parent="BorderLeft" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -60.165, -44.4382, -61.1163, -33.736, -68.2511, -20.8934, -78.7155, -11.3803, -90.369, -5.91025, -99.8821, -4.72112, -99.8821, 4.79196, -89.1799, 4.07848, -78.002, 0.273247, -69.2024, -5.67243, -61.3541, -13.2829, -55.4084, -23.2716, -51.1275, -32.3091, -49.7006, -39.6817, -49.9384, -44.6761 )
+
+[node name="BorderRight" type="StaticBody2D" parent="." index="2" groups=[
+"border",
+]]
+
+position = Vector2( 0, 55 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Collision" type="CollisionPolygon2D" parent="BorderRight" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( 59.9377, -154.438, 58.7486, -137.315, 53.2785, -107.824, 42.8141, -82.1388, 25.6906, -55.74, 7.85356, -37.1895, -11.6483, -21.7308, -34.9553, -8.41245, -55.1706, -1.27763, -76.575, 3.24109, -93.2229, 5.14369, -99.8821, 5.14369, -99.8821, -4.36938, -76.575, -5.79634, -48.7493, -13.169, -25.9179, -24.109, -8.31866, -36.2382, 7.37791, -50.0322, 19.5071, -64.064, 29.258, -77.6201, 35.4415, -89.2736, 41.1494, -102.83, 45.1924, -116.148, 48.9976, -132.32, 50.4246, -146.828, 50.1868, -154.914 )
+
+[connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="_on_Checkpoint_body_entered"]
+
+
